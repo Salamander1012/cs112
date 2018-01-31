@@ -1,0 +1,20 @@
+public class LinkedLists {
+	public static void main(String[] args) {
+
+		
+		StringLL list = new StringLL("sal");
+		list.addToFront("test");
+		list.addToEnd("end test");
+		list.addAfter("sal", "liz");
+		list.addAfter("liz", "liz");
+		list.addAfterLastOccurence("liz", "sal");
+		list.print();
+		System.out.println();
+		list.delete("liz");
+		list.print();
+		list.delete("test");
+		list.print();
+	}
+	
+}
+

@@ -1,0 +1,18 @@
+
+//generic linked list
+public class LinkedList <T> {
+	Node<T> head;
+	int size;
+	
+	public LinkedList() {
+		this.head = null;
+		this.size = 0;
+	}
+	
+	public void addToFront(T data) {
+		Node node = new Node<T>(data, head);
+		node.next = head;
+		head = node;
+		size +=1;
+	}
+}

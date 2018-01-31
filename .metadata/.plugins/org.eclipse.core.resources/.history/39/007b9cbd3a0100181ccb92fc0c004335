@@ -1,0 +1,64 @@
+
+public class StringLL {
+	StringNode head  = null;
+	
+	public StringLL(String data) {
+		StringNode node  = new StringNode(data, null);
+		head = node;
+	}
+	
+	public void print() {
+		StringNode pointer = this.head;
+		while(pointer!=null) {
+			System.out.print(pointer.data + "->" );
+			pointer = pointer.next;
+		}
+		System.out.println("\\");
+	}
+	
+	public boolean contains(String target) {
+		StringNode ptr = head;
+		while(ptr!=null) {
+			if(ptr.data == target) {
+				return true;
+			}
+			ptr = ptr.next;
+		}
+		return false;
+	}
+	
+	public void addToFront(String data) {
+		StringNode node = new StringNode(data, null);
+		node.next = head;
+		head = node;
+	}
+	
+	public void addToEnd(String data) {
+		StringNode ptr = head;
+		while(ptr.next!=null) {
+			ptr = ptr.next;
+		}
+		StringNode node = new StringNode(data, null); 
+		ptr.next = node;
+	}
+	
+	public void addAfter(String target, String newString) {
+		StringNode ptr = head;
+		while(ptr!=null) {
+			if(ptr.data==target) {
+				StringNode node = new StringNode(newString, ptr.next);
+				ptr.next = node;
+				break;
+			}
+			ptr = ptr.next;
+		}
+	}
+	
+	public void addAfterLastOccurence(String target, String newString) {
+		StringNode ptr = head;
+		StringNode last = null;
+		while(ptr!=null) {
+			ptr = ptr.next;
+		}
+	}
+}

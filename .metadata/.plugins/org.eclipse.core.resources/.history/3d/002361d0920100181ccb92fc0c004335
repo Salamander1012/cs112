@@ -1,0 +1,7 @@
+public class LinkedLists {
+	public static void main(String[] args) {
+		StringLL list = new StringLL("sal");
+	}
+	
+}
+

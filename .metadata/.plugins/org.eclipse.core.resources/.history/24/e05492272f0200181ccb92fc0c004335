@@ -1,0 +1,11 @@
+
+//generic linked list
+public class LinkedList <T> {
+	Node<T> head;
+	int size;
+	
+	public LinkedList() {
+		this.head = null;
+		this.size = 0;
+	}
+}

@@ -1,0 +1,13 @@
+public class LinkedLists {
+	public static void main(String[] args) {
+		StringLL list = new StringLL("Karachi");
+		list.print();
+		list.addToEnd("Cherry Hill");
+		list.print();
+		
+		
+		String x = "2x^2 + 3x - 4";
+	}
+	
+}
+

@@ -1,0 +1,124 @@
+public class LinkedLists {
+	public static void main(String[] args) {
+		/*
+		IntNode head = null;
+		head = addToFront(head, 1);
+		head = addToFront(head, 2);
+		head = addToFront(head, 3);
+		head = addToFront(head, 4);
+		head = addToFront(head, 5);
+		printLinkedList(head);
+		head = removeFromFront(head);
+		printLinkedList(head);
+		System.out.println(contains(head, 4));
+		addAfter(head, 3, 5);
+		addAfter(head, 3, 5);
+		addAfterLastOccurence(head, 5, 6);
+		head = addToEnd(head, 7);
+		head = delete(head, 3);
+		printLinkedList(head);
+		*/
+		
+		StringLL list = new StringLL("sal");
+		list.addToFront("test");
+		list.addToEnd("end test");
+		list.addAfter("sal", "liz");
+		list.addAfter("liz", "liz");
+		list.print();
+		System.out.println();
+		System.out.println(list.contains("jans"));
+	}
+	
+	public static IntNode addToFront(IntNode head, int newData) {
+		IntNode node = new IntNode(newData, head);
+		return node;
+	}
+	
+	public static IntNode removeFromFront(IntNode front) {
+		if(front == null) {
+			return null;
+		} else {
+			return front.next;
+		}
+		
+	}
+	
+	public static boolean contains(IntNode front, int target) {
+		for(IntNode pointer = front; pointer != null; pointer = pointer.next) {
+			if(pointer.data == target) return true;
+		}
+		return false;
+	}
+	
+	public static IntNode addToEnd(IntNode front, int data) {
+		if(front == null) {
+			return addToFront(front, data);
+		} else {
+			IntNode pointer = front;
+			while(pointer.next!=null) {
+				pointer = pointer.next;
+			}
+			IntNode node = new IntNode(data, null);
+			pointer.next = node;
+			return front;
+		}
+	}
+	
+	public static boolean addAfter(IntNode front, int target, int data) {
+		for(IntNode ptr = front; ptr != null; ptr = ptr.next) {
+			if(ptr.data == target) {
+				//found target insert new node after it
+				IntNode node = new IntNode(data, ptr.next);
+				ptr.next = node;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean addAfterLastOccurence(IntNode front, int target, int data) {
+		IntNode last = null;
+		for(IntNode ptr = front; ptr != null; ptr = ptr.next) {
+			if(ptr.data == target) {
+				last = ptr;
+			}
+		}
+		if(last == null) {
+			//target not found
+			return false;
+		} else {
+			IntNode node = new IntNode(data, last.next);
+			last.next = node;
+			return true;
+		}
+	}
+	
+	public static IntNode delete(IntNode front, int target) {
+		IntNode prev = null;
+		IntNode ptr = front;
+		while(ptr!=null && ptr.data!=target) {
+			prev = ptr;
+			ptr = ptr.next;
+		}
+		if(ptr == null) {
+			//list is empty or target does not exists
+			return null;
+		} else if(ptr == front) {
+			//target is the first node of the linked list
+			return front.next;
+		} else {
+			prev.next = ptr.next;
+			return front;
+		}
+		
+	}
+	public static void printLinkedList(IntNode front) {
+		IntNode pointer = front;
+		while(pointer!=null) {
+			System.out.print(pointer.data + "->" );
+			pointer = pointer.next;
+		}
+		System.out.println("\\");
+	}
+}
+

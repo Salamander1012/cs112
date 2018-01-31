@@ -1,0 +1,16 @@
+public class Compress {
+	public static void main(String[] args) {
+		//System.out.println(compress("wwws"));
+		
+		System.out.println("aeiou".contains("ak"));
+	}
+	
+	public static String compress(String original) {
+		char currentChar = original.charAt(0);
+		int count = 0;
+		String output = "";
+		
+		return original;
+	}
+}
+	

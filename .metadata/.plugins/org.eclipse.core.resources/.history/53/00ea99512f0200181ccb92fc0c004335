@@ -1,0 +1,16 @@
+public class LinkedLists {
+	public static void main(String[] args) {
+		StringLL list = new StringLL("Karachi");
+		list.print();
+		list.addToEnd("Cherry Hill");
+		list.print();
+		
+		System.out.println(list.size);
+		
+		LinkedList l = new LinkedList();
+		l.addToFront("salman");
+		l.print();
+	}
+	
+}
+

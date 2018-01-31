@@ -1,0 +1,10 @@
+
+public class StringNode {
+	String data;
+	StringNode next;
+	
+	StringNode (String d, StringNode next) {
+		this.data = d;
+		this.next = next;
+	}
+}

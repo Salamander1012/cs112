@@ -1,0 +1,30 @@
+public class Compress {
+	public static void main(String[] args) {
+		System.out.println(compress("wwws"));
+		
+		//System.out.println("aeiou".contains("a"));
+	}
+	
+	public static String compress(String original) {
+		
+		char currentChar = original.charAt(0);
+		String out = "";
+		int startIndex = 0;
+		for (int i = 0; i<original.length();i++) {
+			
+			if(original.charAt(i)!=currentChar) {
+				out += original.substring(startIndex, i).length();
+				out += original.charAt(i-1);
+				startIndex = i;
+				currentChar = original.charAt(i);
+			} else if(i==original.length()-1) {
+				out += original.substring(startIndex, i).length();
+				out += original.charAt(i-1);
+				startIndex = i;
+				currentChar = original.charAt(i);
+			}
+		}
+		return out;
+	}
+}
+	

@@ -1,0 +1,13 @@
+public class Compress {
+	public static void main(String[] args) {
+		System.out.println(compress("wwws"));
+		
+		//System.out.println("aeiou".contains("a"));
+	}
+	
+	public static String compress(String original) {
+		
+		return original.substring(0, original.length());
+	}
+}
+	

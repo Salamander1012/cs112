@@ -177,12 +177,12 @@ public class Polynomial {
 		/** COMPLETE THIS METHOD **/
 		// FOLLOWING LINE IS A PLACEHOLDER TO MAKE THIS METHOD COMPILE
 		// CHANGE IT AS NEEDED FOR YOUR IMPLEMENTATION
-		Node sum = null;
+		Node sum = new Node(0, 0, null);
 		for(Node ptr1 = poly1; ptr1!=null; ptr1 = ptr1.next) {
 			for(Node ptr2 = poly2; ptr2!=null; ptr2 = ptr2.next) {
 				Node node = new Node(ptr1.term.coeff*ptr2.term.coeff, ptr1.term.degree+ptr2.term.degree, null);
-				if(sum==null) {
-					sum = node;
+				if(node.term.coeff==0.0) {
+					continue;
 				} else {
 					sum = add(sum, node);
 				}

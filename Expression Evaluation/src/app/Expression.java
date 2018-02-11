@@ -144,20 +144,6 @@ public class Expression {
     			return Float.parseFloat(expr);
     		} 
     		
-//    		else if(expr.contains("[")) { //checks if its an array
-//    			Array arr = new Array(expr.substring(0, expr.indexOf('[')));
-//    			System.out.println(arr.name);
-//    			if(arrays.contains(arr)) {
-//    				Array arrFromList = arrays.get(arrays.indexOf(arr));
-//    				String innerBracket = expr.substring(expr.indexOf('[')+1, expr.length()-1);
-//    				System.out.println(innerBracket);
-//    				return arrFromList.values[(int)evaluate(innerBracket, vars, arrays)];
-//    				
-//    			}
-//    		}
-    		
-    		
-    		
     		
     		//handles parentheses
     		int innerParenStart = 0;

@@ -44,16 +44,6 @@ public class Expression {
 				vars.add(new Variable(terms[i]));
 			}
 		}
-//    		System.out.println("vars:");
-//    		for(int i = 0; i<vars.size(); i++) {
-//    			System.out.println(vars.get(i).name);
-//    		}
-//    		
-//    		System.out.println("arrays:");
-//    		for(int i = 0; i<arrays.size(); i++) {
-//    			System.out.println(arrays.get(i).name);
-//    		}
-
     }
     
     /**
@@ -125,14 +115,10 @@ public class Expression {
     		expr = expr.replace("--", "+");
     		expr = expr.replace("+-", "-");
     		expr = expr.replace("-+", "-");
-   
-    		//System.out.println("eval(" + expr + ")");
     		
     		/*BASE CASES*/
     		Variable var = new Variable(expr);
-    		//System.out.println(var.name);
     		if(vars.contains(var)) { //check if its a var
-    			
     			return vars.get(vars.indexOf(var)).value;
     		} else if(isNum(expr)) { //check if its a int
     			return Float.parseFloat(expr);
@@ -171,7 +157,6 @@ public class Expression {
     		for(int i = 0; i<expr.length(); i++) {
     			if(isOperator(expr.charAt(i)) && !inBracket) arrNameStart = i+1;
     			if(expr.charAt(i)=='[') {
-    				//System.out.println("opening bracket at index: " + i);
     				bracketLayers++;
     				if(bracketLayers==1) {
     					inBracket = true;
@@ -180,7 +165,6 @@ public class Expression {
     				}
     			}
     			if(expr.charAt(i)==']') {
-    				//System.out.println("closing bracket at index: " + i);
     				bracketLayers--;
     				if(bracketLayers==0) {
     					innerBracketEnd=i-1;
@@ -188,10 +172,8 @@ public class Expression {
     					String arrName = expr.substring(arrNameStart, arrNameEnd);
     					Array arr = new Array(arrName);
     					System.out.println("|"+arrName + "["+expr.substring(innerBracketStart, innerBracketEnd+1) + "]|");
-    					
     					float arrValue = arrays.get(arrays.indexOf(arr)).values[(int)evaluatedInnerBracket];
     					String resultString = expr.substring(0, arrNameStart) + arrValue + expr.substring(i+1);
-//    					System.out.println(resultString);
     					return evaluate(resultString, vars, arrays);
     				} 
     			}
@@ -199,7 +181,6 @@ public class Expression {
     		
     		
     		//separates expression at addition and subtraction signs
-    		//for(int i = 0; i<expr.length(); i++) {
     		for(int i = expr.length()-1; i>=0; i--) {
 			if(isOperator(expr.charAt(i))) {
 				if(expr.charAt(i) == '-') {
@@ -240,10 +221,6 @@ public class Expression {
     				}
     			}
     		}
-    		
-    		
-    		
-    		
     		return 0;
     }
 }

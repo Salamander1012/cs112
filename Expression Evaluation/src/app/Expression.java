@@ -28,34 +28,22 @@ public class Expression {
     	 ** to this method - you just need to fill them in.
     	 **/
     		expr = expr.replaceAll("\\s+",""); //removes white spaces
-    		String[] terms = expr.split("[-+*/()\\]]"); //splits at operators, parenthesis and closed bracket
+    		expr = expr.replace("(", "");
+    		expr = expr.replace(")", "");
+    		expr = expr.replace("]", "");
+    		expr = expr.replaceAll("[0-9]", "");
+    		expr = expr.replaceAll("[-+*/]", " ");
+    		expr = expr.replace("[", "[ ");
+    		System.out.println(expr);
+		
+    		String[] terms = expr.split(" ");
     		for(int i = 0; i<terms.length; i++) {
-    			//System.out.println(terms[i]);
-    			if(!terms[i].equals("") || !terms[i].equals(" ")) {
-    				//checks if string is an Int, if not lets does something in the catch
-    				try {
-    					Float.parseFloat(terms[i]);
-    				} catch (NumberFormatException e) {
-    					
-    					if(terms[i].contains("[")) { //checks if term is an array
-    						int nameStart = 0;
-    						int nameEnd = 0;
-    						for(int j = 0; j<terms[i].length(); j++) {
-    							if(terms[i].charAt(j)=='[') {
-    								nameEnd = j;
-    								arrays.add(new Array(terms[i].substring(nameStart, nameEnd)));
-    								nameStart = j+1;
-    							}
-    						}
-    					} else { //if term is not an array
-    						//System.out.println("var: " + terms[i]);
-    						vars.add(new Variable(terms[i]));
-   					}
-
-    				}
-    			}
-    		}
-    		
+			if(terms[i].contains("[")) {
+				arrays.add(new Array(terms[i].substring(0, terms[i].indexOf('['))));
+			} else {
+				vars.add(new Variable(terms[i]));
+			}
+		}
 //    		System.out.println("vars:");
 //    		for(int i = 0; i<vars.size(); i++) {
 //    			System.out.println(vars.get(i).name);
@@ -65,6 +53,7 @@ public class Expression {
 //    		for(int i = 0; i<arrays.size(); i++) {
 //    			System.out.println(arrays.get(i).name);
 //    		}
+
     }
     
     /**
@@ -133,12 +122,17 @@ public class Expression {
     evaluate(String expr, ArrayList<Variable> vars, ArrayList<Array> arrays) {
     		/** COMPLETE THIS METHOD **/
     		expr = expr.replaceAll("\\s+",""); //removes all spaces
-    		
+    		expr = expr.replace("--", "+");
+    		expr = expr.replace("+-", "-");
+    		expr = expr.replace("-+", "-");
+   
     		//System.out.println("eval(" + expr + ")");
     		
     		/*BASE CASES*/
     		Variable var = new Variable(expr);
+    		//System.out.println(var.name);
     		if(vars.contains(var)) { //check if its a var
+    			
     			return vars.get(vars.indexOf(var)).value;
     		} else if(isNum(expr)) { //check if its a int
     			return Float.parseFloat(expr);
@@ -193,9 +187,11 @@ public class Expression {
     					float evaluatedInnerBracket = evaluate(expr.substring(innerBracketStart, innerBracketEnd+1), vars, arrays);
     					String arrName = expr.substring(arrNameStart, arrNameEnd);
     					Array arr = new Array(arrName);
+    					System.out.println("|"+arrName + "["+expr.substring(innerBracketStart, innerBracketEnd+1) + "]|");
     					
     					float arrValue = arrays.get(arrays.indexOf(arr)).values[(int)evaluatedInnerBracket];
     					String resultString = expr.substring(0, arrNameStart) + arrValue + expr.substring(i+1);
+//    					System.out.println(resultString);
     					return evaluate(resultString, vars, arrays);
     				} 
     			}
@@ -207,9 +203,23 @@ public class Expression {
     		for(int i = expr.length()-1; i>=0; i--) {
 			if(isOperator(expr.charAt(i))) {
 				if(expr.charAt(i) == '-') {
+					if(expr.charAt(i-1)=='*') {
+						System.out.print("|"+expr.substring(0, i-1) + "| * |");
+    						System.out.println(expr.substring(i)+"|");
+    						return evaluate(expr.substring(0, i-1), vars, arrays) * evaluate(expr.substring(i), vars, arrays);
+					}
+					if(expr.charAt(i-1)=='/') {
+						System.out.print("|"+expr.substring(0, i-1) + "| / |");
+    						System.out.println(expr.substring(i)+"|");
+    						return evaluate(expr.substring(0, i-1), vars, arrays) / evaluate(expr.substring(i), vars, arrays);
+					}
+					System.out.print("|"+expr.substring(0, i) + "| - |");
+					System.out.println(expr.substring(i+1)+"|");
 					return evaluate(expr.substring(0, i), vars, arrays) - evaluate(expr.substring(i+1), vars, arrays);
 				}
 				if(expr.charAt(i) == '+') {
+					System.out.print("|"+expr.substring(0, i) + "| + |");
+					System.out.println(expr.substring(i+1)+"|");
 					return evaluate(expr.substring(0, i), vars, arrays) + evaluate(expr.substring(i+1), vars, arrays);
 				} 
 			}
@@ -219,9 +229,13 @@ public class Expression {
     		for(int i = expr.length()-1; i>=0; i--) {
     			if(isOperator(expr.charAt(i))) {
     				if(expr.charAt(i) == '/') {
+    					System.out.print("|"+expr.substring(0, i) + "| / |");
+    					System.out.println(expr.substring(i+1)+"|");
     					return evaluate(expr.substring(0, i), vars, arrays) / evaluate(expr.substring(i+1), vars, arrays);
     				} 
     				if(expr.charAt(i) == '*') {
+    					System.out.print("|"+expr.substring(0, i) + "| * |");
+    					System.out.println(expr.substring(i+1)+"|");
     					return evaluate(expr.substring(0, i), vars, arrays) * evaluate(expr.substring(i+1), vars, arrays);
     				}
     			}

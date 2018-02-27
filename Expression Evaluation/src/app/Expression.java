@@ -108,6 +108,16 @@ public class Expression {
     		}
     		return false;
     }
+    
+    private static boolean isParen(char c) {
+		if (c == '(' || c == ')' || c == '[' || c == ']') {
+			return true;
+		}
+		return false;
+    }
+    
+  
+    
     public static float 
     evaluate(String expr, ArrayList<Variable> vars, ArrayList<Array> arrays) {
     		/** COMPLETE THIS METHOD **/
@@ -116,6 +126,7 @@ public class Expression {
     		expr = expr.replace("+-", "-");
     		expr = expr.replace("-+", "-");
     		
+    		System.out.println(expr);
     		/*BASE CASES*/
     		Variable var = new Variable(expr);
     		if(vars.contains(var)) { //check if its a var
@@ -185,9 +196,22 @@ public class Expression {
 			if(isOperator(expr.charAt(i))) {
 				if(expr.charAt(i) == '-') {
 					if(expr.charAt(i-1)=='*') {
-						System.out.print("|"+expr.substring(0, i-1) + "| * |");
-    						System.out.println(expr.substring(i)+"|");
-    						return evaluate(expr.substring(0, i-1), vars, arrays) * evaluate(expr.substring(i), vars, arrays);
+						
+						int tempCounter = i-2;
+						while(!isOperator(expr.charAt(tempCounter)) && !isParen(expr.charAt(tempCounter)) && tempCounter>0) {
+							tempCounter--;
+						}
+						if(expr.charAt(tempCounter)=='/' || expr.charAt(tempCounter)=='*') {
+							System.out.println("breaking");
+							break;
+						}
+						if(tempCounter==0) {
+//							System.out.println("basic");
+							System.out.print("|"+expr.substring(0, i-1) + "| * |");
+	    						System.out.println(expr.substring(i)+"|");
+	    						return evaluate(expr.substring(0, i-1), vars, arrays) * evaluate(expr.substring(i), vars, arrays);
+						}
+
 					}
 					if(expr.charAt(i-1)=='/') {
 						System.out.print("|"+expr.substring(0, i-1) + "| / |");

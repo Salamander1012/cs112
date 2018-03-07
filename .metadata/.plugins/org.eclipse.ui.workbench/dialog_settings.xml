@@ -18,6 +18,8 @@
 		<list key="textArray">
 		</list>
 	</section>
+	<section name="NewWizardAction">
+	</section>
 	<section name="InstallationDialogSettings">
 		<item value="702" key="DIALOG_WIDTH"/>
 		<item value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont" key="DIALOG_FONT_NAME"/>

@@ -10,6 +10,30 @@
       <link>http://www.eclipse.org</link>
     </image>
      <item>
+      <title><![CDATA[Last call for EclipseCon France submissions]]></title>
+      <link><![CDATA[https://www.eclipsecon.org/france2018/cfp]]></link>
+      <description><![CDATA[Deadline to propose a talk is Monday, March 19. Get your talk in now for your chance to be part of a great program!]]></description>
+      <pubDate>Mon, 12 Mar 2018 16:00:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>0</pressrelease>
+    </item>
+     <item>
+      <title><![CDATA[Eclipse Foundation supports EU funded Brain-IoT Project]]></title>
+      <link><![CDATA[https://www.eclipse.org/org/press-release/20180312-brainiot.php]]></link>
+      <description><![CDATA[Eclipse Foundation Europe Selected to Provide Open Source Community Building Expertise for EU funded IoT Research Project]]></description>
+      <pubDate>Mon, 12 Mar 2018 09:00:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>1</pressrelease>
+    </item>
+     <item>
+      <title><![CDATA[Eclipse Foundation Announces 2018 Board Member Election Results]]></title>
+      <link><![CDATA[https://www.eclipse.org/org/press-release/20180307-boardelectionresults2018.php]]></link>
+      <description><![CDATA[Today we are please to announce the results of the Eclipse Foundation Sustaining Member and Committer Member elections.]]></description>
+      <pubDate>Wed, 07 Mar 2018 18:00:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>1</pressrelease>
+    </item>
+     <item>
       <title><![CDATA[From Java EE to Jakarta EE]]></title>
       <link><![CDATA[https://mmilinkov.wordpress.com/2018/02/26/and-the-name-is/]]></link>
       <description><![CDATA[We are happy to announce that the new name for the technology formerly known as Java EE is... Jakarta EE!]]></description>

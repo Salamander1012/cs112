@@ -29,6 +29,14 @@ public class Tree {
 		root = null;
 	}
 	
+	private String getTagName(String s) {
+		s = s.replaceAll("<", "");
+		//s = s.replaceAll("</", "");
+		s = s.replaceAll("/", "");
+		s = s.replaceAll(">", "");
+		return s;
+	}
+	
 	/**
 	 * Builds the DOM tree from input HTML file, through scanner passed
 	 * in to the constructor and stored in the sc field of this object. 
@@ -37,12 +45,11 @@ public class Tree {
 	 */
 	public void build() {
 		/** COMPLETE THIS METHOD **/
-		sc.useDelimiter("\n");
 		Stack<TagNode> stack = new Stack<TagNode>();
 		TagNode ptr = root;
 		while(sc.hasNext()) {
-			String line = sc.next();
-			TagNode t = new TagNode(line, null, null);
+			String line = sc.nextLine();
+			TagNode t = new TagNode(getTagName(line), null, null);
 			if(ptr == null) {
 				root = t;
 				ptr = root;
@@ -60,14 +67,18 @@ public class Tree {
 					stack.push(ptr);
 				}
 			} else if (!line.contains("<") && !line.contains("</")) {
-				ptr.firstChild = t;
-				ptr = ptr.firstChild;
+				if(ptr.firstChild!=null) {
+					ptr.sibling = new TagNode(line, null, null);
+					ptr = ptr.sibling;
+				} else {
+					ptr.firstChild = new TagNode(line, null, null);
+					ptr = ptr.firstChild;
+				}
 			} else {
 				ptr = stack.pop();
 			}
 		}
-//		System.out.println(ptr);
-		print();
+
 		
 	}
 	
@@ -79,6 +90,23 @@ public class Tree {
 	 */
 	public void replaceTag(String oldTag, String newTag) {
 		/** COMPLETE THIS METHOD **/
+		TagNode ptr = root;
+		replaceTraversal(ptr, oldTag, newTag);
+		
+	}
+	
+	private void replaceTraversal(TagNode t, String oldTag, String newTag) {
+		for(TagNode ptr = t; ptr!=null; ptr = ptr.sibling) {
+			if(ptr.tag.equals(oldTag)) {
+				ptr.tag = newTag;
+				System.out.println("repalced");
+			}
+			if(ptr.firstChild!=null) {
+				replaceTraversal(ptr.firstChild, oldTag, newTag);
+			}
+		}
+		
+		
 	}
 	
 	/**

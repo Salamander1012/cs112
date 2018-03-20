@@ -136,6 +136,9 @@ public class Tree {
 		if (t==null) return t;
 	
 		if(t.tag.equals(target)) {
+			if(t.tag.equals("ol") || t.tag.equals("ul")) {
+				convertChildrenToP(t);
+			}
 			TagNode tempSib = t.sibling;
 			t = t.firstChild;
 			addToLastSibling(t, tempSib);
@@ -157,6 +160,13 @@ public class Tree {
 		ptr.sibling = addition;
 	}
 	
+	private void convertChildrenToP(TagNode t) {
+		TagNode ptr = t.firstChild;
+		while(ptr!=null) {
+			ptr.tag = "p";
+			ptr = ptr.sibling;
+		}
+	}
 	/**
 	 * Adds a tag around all occurrences of a word in the DOM tree.
 	 * 

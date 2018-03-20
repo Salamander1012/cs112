@@ -138,7 +138,7 @@ public class Tree {
 		if(t.tag.equals(target)) {
 			TagNode tempSib = t.sibling;
 			t = t.firstChild;
-			t.sibling = tempSib;
+			addToLastSibling(t, tempSib);
 			t.firstChild = removeTagTraversal(t.firstChild, target);
 			t.sibling = removeTagTraversal(t.sibling, target);
 		} else {
@@ -147,8 +147,14 @@ public class Tree {
 		}
 		
 		return t;
+	}
 	
-		
+	private void addToLastSibling(TagNode t, TagNode addition) {
+		TagNode ptr = t;
+		while(ptr.sibling!=null) {
+			ptr = ptr.sibling;
+		}
+		ptr.sibling = addition;
 	}
 	
 	/**

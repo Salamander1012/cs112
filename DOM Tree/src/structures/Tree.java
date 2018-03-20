@@ -115,8 +115,35 @@ public class Tree {
 	 */
 	public void boldRow(int row) {
 		/** COMPLETE THIS METHOD **/
+		root = boldRowTraversal(root, row);
 	}
 	
+	private  TagNode boldRowTraversal(TagNode t, int row) {
+		if (t==null) return t;
+		
+		if(t.tag.equals("table")) {
+			boldRowAt(t, row);
+		} else {
+			t.firstChild = boldRowTraversal(t.firstChild, row);
+			t.sibling = boldRowTraversal(t.sibling, row);
+		}
+		
+		return t;
+	}
+	
+	private void boldRowAt(TagNode t, int i) {
+		TagNode row = t.firstChild;
+		int index = 1;
+		while(index<i) {
+			row = row.sibling;
+			index++;
+		}
+		for(TagNode col = row.firstChild; col!=null; col = col.sibling) {
+			TagNode bold = new TagNode("b", null, null);
+			bold.firstChild = col.firstChild;
+			col.firstChild = bold;
+		}
+	}
 	/**
 	 * Remove all occurrences of a tag from the DOM tree. If the tag is p, em, or b, all occurrences of the tag
 	 * are removed. If the tag is ol or ul, then All occurrences of such a tag are removed from the tree, and, 
@@ -129,7 +156,7 @@ public class Tree {
 		if(root.tag.equals(tag)) {
 			root = root.firstChild;
 		}
-		removeTagTraversal(root, tag);
+		root = removeTagTraversal(root, tag);
 	}
 	
 	private TagNode removeTagTraversal(TagNode t, String target) {

@@ -105,8 +105,6 @@ public class Tree {
 				replaceTraversal(ptr.firstChild, oldTag, newTag);
 			}
 		}
-		
-		
 	}
 	
 	/**
@@ -128,6 +126,29 @@ public class Tree {
 	 */
 	public void removeTag(String tag) {
 		/** COMPLETE THIS METHOD **/
+		if(root.tag.equals(tag)) {
+			root = root.firstChild;
+		}
+		removeTagTraversal(root, tag);
+	}
+	
+	private TagNode removeTagTraversal(TagNode t, String target) {
+		if (t==null) return t;
+	
+		if(t.tag.equals(target)) {
+			TagNode tempSib = t.sibling;
+			t = t.firstChild;
+			t.sibling = tempSib;
+			t.firstChild = removeTagTraversal(t.firstChild, target);
+			t.sibling = removeTagTraversal(t.sibling, target);
+		} else {
+			t.firstChild = removeTagTraversal(t.firstChild, target);
+			t.sibling = removeTagTraversal(t.sibling, target);
+		}
+		
+		return t;
+	
+		
 	}
 	
 	/**

@@ -77,9 +77,7 @@ public class Tree {
 			} else {
 				ptr = stack.pop();
 			}
-		}
-
-		
+		}		
 	}
 	
 	/**
@@ -202,6 +200,61 @@ public class Tree {
 	 */
 	public void addTag(String word, String tag) {
 		/** COMPLETE THIS METHOD **/
+		root = addTagTraversal(root, tag, word);
+	}
+	
+	private  TagNode addTagTraversal(TagNode t, String tag, String word) {
+		if (t==null) return t;
+		
+		if(t.tag.contains(word) && t.firstChild==null) {
+			String[] words = t.tag.split(" ");
+			
+			TagNode newNode = null;
+			TagNode stringNode = new TagNode("", null, null);
+			
+			for(int i = 0; i<words.length; i++) {
+				System.out.println(words[i] + " ");
+				if(!words[i].equals(word)) {
+					stringNode.tag += words[i] + " ";
+				} else {
+					if(newNode == null && stringNode.tag.equals("")) {
+						newNode = new TagNode(tag, null, null);
+						newNode.firstChild = new TagNode(words[i], null, null);
+					} else if(newNode == null) {
+						//add stringNode and then new tagged node and then reset stringNode
+						newNode = stringNode;
+						//add newtagged Node to the end of newNode
+						TagNode newTag = new TagNode(tag, null, null);
+						newTag.firstChild = new TagNode(words[i], null, null);
+						addToLastSibling(newNode, newTag);
+						stringNode = new TagNode("", null, null);
+					} else {
+						//
+						TagNode newTag = new TagNode(tag, null, null);
+						newTag.firstChild = new TagNode(words[i], null, null);
+						if(!stringNode.tag.equals("")) {
+							TagNode temp = stringNode;
+							addToLastSibling(newNode, temp);
+							stringNode = new TagNode("", null, null);
+						}
+						addToLastSibling(newNode, newTag);
+					}
+				}
+			}
+			if(!stringNode.tag.equals("")) {
+				TagNode temp = stringNode;
+				addToLastSibling(newNode, temp);
+				stringNode = new TagNode("", null, null);
+			}
+			t = newNode;
+			
+			
+		} else {
+			t.firstChild = addTagTraversal(t.firstChild, tag, word);
+			t.sibling = addTagTraversal(t.sibling, tag, word);
+		}
+		
+		return t;
 	}
 	
 	/**

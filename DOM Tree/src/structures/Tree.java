@@ -203,18 +203,37 @@ public class Tree {
 		root = addTagTraversal(root, tag, word);
 	}
 	
+	private boolean wordCompare(String a, String word) {
+		String w1 = a.toLowerCase();
+		String w2 = word.toLowerCase();
+		if(w1.equals(w2)) {
+			return true;
+		} else if(w1.substring(0, w1.length()-1).equals(w2) && isSpecialChar(w1.charAt(w1.length()-1))) {
+			return true;
+		} 
+		return false;
+	}
+	
+	private boolean isSpecialChar(char c) {
+		if(c=='!' || c=='?' || c=='.' || c==';' || c==':') {
+			return true;
+		}
+		return false;
+	}
+	
 	private  TagNode addTagTraversal(TagNode t, String tag, String word) {
 		if (t==null) return t;
 		
-		if(t.tag.contains(word) && t.firstChild==null) {
+		if(t.tag.toLowerCase().contains(word) && t.firstChild==null) {
 			String[] words = t.tag.split(" ");
 			
 			TagNode newNode = null;
 			TagNode stringNode = new TagNode("", null, null);
 			
 			for(int i = 0; i<words.length; i++) {
-				System.out.println(words[i] + " ");
-				if(!words[i].equals(word)) {
+//				System.out.println(words[i] + " ");
+//				System.out.println(wordCompare(words[i], word));
+				if(!wordCompare(words[i], word)) {
 					stringNode.tag += words[i] + " ";
 				} else {
 					if(newNode == null && stringNode.tag.equals("")) {
@@ -241,6 +260,7 @@ public class Tree {
 					}
 				}
 			}
+			//adds last words to newNode
 			if(!stringNode.tag.equals("")) {
 				TagNode temp = stringNode;
 				addToLastSibling(newNode, temp);

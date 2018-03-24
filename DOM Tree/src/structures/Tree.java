@@ -56,7 +56,7 @@ public class Tree {
 				stack.push(ptr);
 				continue;
 			}
-			if(line.contains("<") && !line.contains("</")) {
+			if(isOpeningTag(line)) {
 				if(stack.peek().firstChild==null) {
 					ptr.firstChild = t;
 					ptr = ptr.firstChild;
@@ -66,7 +66,7 @@ public class Tree {
 					ptr = ptr.sibling;
 					stack.push(ptr);
 				}
-			} else if (!line.contains("<") && !line.contains("</")) {
+			} else if (isWordsTag(line)) {
 				if(ptr.firstChild!=null) {
 					ptr.sibling = new TagNode(line, null, null);
 					ptr = ptr.sibling;
@@ -78,6 +78,20 @@ public class Tree {
 				ptr = stack.pop();
 			}
 		}		
+	}
+	
+	private boolean isOpeningTag(String l) {
+		if(l.contains("<") && !l.contains("</")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isWordsTag(String l) {
+		if(!l.contains("<") && !l.contains("</")) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -229,7 +243,7 @@ public class Tree {
 			
 			TagNode newNode = null;
 			TagNode stringNode = new TagNode("", null, null);
-			
+			TagNode tempSib = t.sibling;
 			for(int i = 0; i<words.length; i++) {
 //				System.out.println(words[i] + " ");
 //				System.out.println(wordCompare(words[i], word));
@@ -266,6 +280,7 @@ public class Tree {
 				addToLastSibling(newNode, temp);
 				stringNode = new TagNode("", null, null);
 			}
+			addToLastSibling(newNode, tempSib);
 			t = newNode;
 			
 			

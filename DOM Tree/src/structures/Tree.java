@@ -239,6 +239,7 @@ public class Tree {
 		if (t==null) return t;
 		
 		if(t.tag.toLowerCase().contains(word) && t.firstChild==null) {
+			System.out.println(t.tag);
 			String[] words = t.tag.split(" ");
 			
 			TagNode newNode = null;
@@ -280,6 +281,7 @@ public class Tree {
 				addToLastSibling(newNode, temp);
 				stringNode = new TagNode("", null, null);
 			}
+			tempSib = addTagTraversal(tempSib, tag, word);
 			addToLastSibling(newNode, tempSib);
 			t = newNode;
 			

@@ -46,15 +46,18 @@ public class LittleSearchEngine {
 		Scanner sc = new Scanner(new File(docFile));
 		while(sc.hasNext()) {
 			String word = sc.next();
-//			System.out.print(word + "  |  ");
 			word = getKeyword(word);
-//			System.out.println(word);
+			System.out.println(word);
 			
-			
+			if(!map.containsKey(word)) {
+				Occurrence o = new Occurrence(docFile, 1);
+				map.put(word, o);
+			} else {
+				map.get(word).frequency++;
+			}
 		}
-		// following line is a placeholder to make the program compile
-		// you should modify it as needed when you write your code
-		return null;
+		
+		return map;
 	}
 	
 	/**
@@ -84,14 +87,26 @@ public class LittleSearchEngine {
 	public String getKeyword(String word) {
 		/** COMPLETE THIS METHOD **/
 		
-		// following line is a placeholder to make the program compile
-		// you should modify it as needed when you write your code
+		word = removeLeadingAndTrailingPunctuations(word);
+		word = word.toLowerCase();
+		
 		if(containsPunctuations(word)) {
-			System.out.println(word);
-			return removeLeadingAndTrailingPunctuations(word);
+			return null;
 		}
-//		System.out.println(word);
-		return null;
+		
+		if(isNoiseWord(word)) {
+			return null;
+		}
+		
+		return word;
+	}
+	
+	
+	private boolean isNoiseWord(String s) {
+		if(noiseWords.contains(s)) {
+			return true;
+		}
+		return false;
 	}
 	
 	private String removeLeadingAndTrailingPunctuations(String word) {
@@ -106,7 +121,6 @@ public class LittleSearchEngine {
 			}
 		}
 		cleanWord = cleanWord.substring(lastLeadingPuncIndex + 1);
-//		System.out.println("\t leading: " + cleanWord);
 		
 		int firstTrailingPuncIndex = cleanWord.length();
 		for(int i = cleanWord.length()-1; i>=0; i--) {
@@ -122,12 +136,6 @@ public class LittleSearchEngine {
 		} else {
 			cleanWord = cleanWord.substring(0, firstTrailingPuncIndex);
 		}
-		
-		if(containsPunctuations(word)) {
-			System.out.println("clean: " + cleanWord);
-			System.out.println();
-		}
-		
 		
 		return cleanWord;
 	}

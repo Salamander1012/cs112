@@ -42,6 +42,16 @@ public class LittleSearchEngine {
 	throws FileNotFoundException {
 		/** COMPLETE THIS METHOD **/
 		
+		HashMap<String,Occurrence> map = new HashMap<String,Occurrence>();
+		Scanner sc = new Scanner(new File(docFile));
+		while(sc.hasNext()) {
+			String word = sc.next();
+//			System.out.print(word + "  |  ");
+			word = getKeyword(word);
+//			System.out.println(word);
+			
+			
+		}
 		// following line is a placeholder to make the program compile
 		// you should modify it as needed when you write your code
 		return null;
@@ -76,7 +86,66 @@ public class LittleSearchEngine {
 		
 		// following line is a placeholder to make the program compile
 		// you should modify it as needed when you write your code
+		if(containsPunctuations(word)) {
+			System.out.println(word);
+			return removeLeadingAndTrailingPunctuations(word);
+		}
+//		System.out.println(word);
 		return null;
+	}
+	
+	private String removeLeadingAndTrailingPunctuations(String word) {
+		String cleanWord = word;
+		
+		int lastLeadingPuncIndex = -1;
+		for(int i = 0; i<word.length(); i++) {
+			if(isPunctuation(word.charAt(i))) {
+				lastLeadingPuncIndex = i;
+			} else {
+				break;
+			}
+		}
+		cleanWord = cleanWord.substring(lastLeadingPuncIndex + 1);
+//		System.out.println("\t leading: " + cleanWord);
+		
+		int firstTrailingPuncIndex = cleanWord.length();
+		for(int i = cleanWord.length()-1; i>=0; i--) {
+			if(isPunctuation(cleanWord.charAt(i))) {
+				firstTrailingPuncIndex = i;
+			} else {
+				break;
+			}
+		}
+		
+		if(cleanWord.length()==1) {
+			cleanWord = cleanWord.substring(firstTrailingPuncIndex-1);
+		} else {
+			cleanWord = cleanWord.substring(0, firstTrailingPuncIndex);
+		}
+		
+		if(containsPunctuations(word)) {
+			System.out.println("clean: " + cleanWord);
+			System.out.println();
+		}
+		
+		
+		return cleanWord;
+	}
+	
+	private boolean containsPunctuations(String word) {
+		for(int i=0; i<word.length(); i++) {
+			if(isPunctuation(word.charAt(i))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isPunctuation(char c) {
+		if (c == '.' || c == ',' || c == '?' || c == ':' || c == '!' || c == '\'' || c == '"' || c == '(' || c == ')' || c == '_' || c == '-' || c == '[' || c == ']' || c == ';') {
+			return true;
+		}
+		return false;
 	}
 	
 	/**

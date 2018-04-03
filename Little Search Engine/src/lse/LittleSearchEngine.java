@@ -47,7 +47,7 @@ public class LittleSearchEngine {
 		while(sc.hasNext()) {
 			String word = sc.next();
 			word = getKeyword(word);
-			System.out.println(word);
+//			System.out.println(word);
 			
 			if(!map.containsKey(word)) {
 				Occurrence o = new Occurrence(docFile, 1);
@@ -71,6 +71,18 @@ public class LittleSearchEngine {
 	 */
 	public void mergeKeywords(HashMap<String,Occurrence> kws) {
 		/** COMPLETE THIS METHOD **/
+		for (String s : kws.keySet()) {
+			
+			if(keywordsIndex.containsKey(s)) {
+				keywordsIndex.get(s).add(kws.get(s));
+			} else {
+				ArrayList<Occurrence> os = new ArrayList<Occurrence>();
+				os.add(kws.get(s));
+				keywordsIndex.put(s, os);
+			}
+			
+			
+		}
 	}
 	
 	/**
@@ -100,7 +112,6 @@ public class LittleSearchEngine {
 		
 		return word;
 	}
-	
 	
 	private boolean isNoiseWord(String s) {
 		if(noiseWords.contains(s)) {

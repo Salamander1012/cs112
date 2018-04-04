@@ -71,10 +71,15 @@ public class LittleSearchEngine {
 	 */
 	public void mergeKeywords(HashMap<String,Occurrence> kws) {
 		/** COMPLETE THIS METHOD **/
+		if(kws.containsKey(null)) {
+			kws.remove(null);
+		}
 		for (String s : kws.keySet()) {
 			
 			if(keywordsIndex.containsKey(s)) {
 				keywordsIndex.get(s).add(kws.get(s));
+				System.out.println(s);
+				insertLastOccurrence(keywordsIndex.get(s));
 			} else {
 				ArrayList<Occurrence> os = new ArrayList<Occurrence>();
 				os.add(kws.get(s));
@@ -181,10 +186,45 @@ public class LittleSearchEngine {
 	public ArrayList<Integer> insertLastOccurrence(ArrayList<Occurrence> occs) {
 		/** COMPLETE THIS METHOD **/
 		
-		// following line is a placeholder to make the program compile
-		// you should modify it as needed when you write your code
-		return null;
+		for(Occurrence k : occs) {
+			System.out.print(k+ " ");
+		}
+		System.out.println();
+		
+		ArrayList<Integer> mids = new ArrayList<Integer>();
+		
+		Occurrence lastOccurrence = occs.get(occs.size()-1);
+		int correctIndex = -1;
+		int l = 0, r = occs.size() - 1;
+        while (l <= r)
+        {
+            int m = l + (r-l)/2;
+            mids.add(m);
+            
+            if (occs.get(m).frequency == lastOccurrence.frequency) {
+                break;
+            }
+            
+            if (occs.get(m).frequency > lastOccurrence.frequency) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
+        }
+        
+        correctIndex = l + (r-l)/2;
+		occs.remove(lastOccurrence);
+		occs.add(correctIndex, lastOccurrence);
+		
+		for(Occurrence k : occs) {
+			System.out.print(k+ " ");
+		}
+		System.out.println();
+		System.out.println();
+		
+		return mids;
 	}
+
 	
 	/**
 	 * This method indexes all keywords found in all the input documents. When this

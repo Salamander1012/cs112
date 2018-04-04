@@ -196,8 +196,7 @@ public class LittleSearchEngine {
 		Occurrence lastOccurrence = occs.get(occs.size()-1);
 		int correctIndex = -1;
 		int l = 0, r = occs.size() - 1;
-        while (l <= r)
-        {
+        while (l <= r)	{
             int m = l + (r-l)/2;
             mids.add(m);
             

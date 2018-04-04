@@ -47,7 +47,9 @@ public class LittleSearchEngine {
 		while(sc.hasNext()) {
 			String word = sc.next();
 			word = getKeyword(word);
-//			System.out.println(word);
+			if(word == null) {
+				continue;
+			}
 			
 			if(!map.containsKey(word)) {
 				Occurrence o = new Occurrence(docFile, 1);
@@ -71,9 +73,7 @@ public class LittleSearchEngine {
 	 */
 	public void mergeKeywords(HashMap<String,Occurrence> kws) {
 		/** COMPLETE THIS METHOD **/
-		if(kws.containsKey(null)) {
-			kws.remove(null);
-		}
+
 		for (String s : kws.keySet()) {
 			
 			if(keywordsIndex.containsKey(s)) {

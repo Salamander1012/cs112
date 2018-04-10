@@ -78,7 +78,7 @@ public class LittleSearchEngine {
 			
 			if(keywordsIndex.containsKey(s)) {
 				keywordsIndex.get(s).add(kws.get(s));
-				System.out.println(s);
+//				System.out.println(s);
 				insertLastOccurrence(keywordsIndex.get(s));
 			} else {
 				ArrayList<Occurrence> os = new ArrayList<Occurrence>();
@@ -186,11 +186,13 @@ public class LittleSearchEngine {
 	public ArrayList<Integer> insertLastOccurrence(ArrayList<Occurrence> occs) {
 		/** COMPLETE THIS METHOD **/
 		
-		for(Occurrence k : occs) {
-			System.out.print(k+ " ");
+//		for(Occurrence k : occs) {
+//			System.out.print(k+ " ");
+//		}
+//		System.out.println();
+		if(occs.size() == 1) {
+			return null;
 		}
-		System.out.println();
-		
 		ArrayList<Integer> mids = new ArrayList<Integer>();
 		
 		Occurrence lastOccurrence = occs.get(occs.size()-1);
@@ -215,11 +217,11 @@ public class LittleSearchEngine {
 		occs.remove(lastOccurrence);
 		occs.add(correctIndex, lastOccurrence);
 		
-		for(Occurrence k : occs) {
-			System.out.print(k+ " ");
-		}
-		System.out.println();
-		System.out.println();
+//		for(Occurrence k : occs) {
+//			System.out.print(k+ " ");
+//		}
+//		System.out.println();
+//		System.out.println();
 		
 		return mids;
 	}
@@ -270,9 +272,29 @@ public class LittleSearchEngine {
 	public ArrayList<String> top5search(String kw1, String kw2) {
 		/** COMPLETE THIS METHOD **/
 		
-		// following line is a placeholder to make the program compile
-		// you should modify it as needed when you write your code
-		return null;
+		ArrayList<Occurrence> occs = new ArrayList<Occurrence>();
+		ArrayList<String> docs = new ArrayList<String>();
+		if(this.keywordsIndex.containsKey(kw1)) {
+			for(Occurrence o : this.keywordsIndex.get(kw1)) {
+				occs.add(o);
+				insertLastOccurrence(occs);
+			}
+		}
+		if(this.keywordsIndex.containsKey(kw2)) {
+			for(Occurrence o : this.keywordsIndex.get(kw2)) {
+				occs.add(o);
+				insertLastOccurrence(occs);
+			}
+		}
+		
+		for(Occurrence o : occs) {
+			if(!docs.contains(o.document)) {
+				docs.add(o.document);
+			}
+		}
+		
+		return docs;
+
 	
 	}
 }

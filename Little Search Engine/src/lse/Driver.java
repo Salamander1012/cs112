@@ -13,13 +13,20 @@ public class Driver {
 			e.printStackTrace();
 		}
 		
-//		ArrayList<Integer> arr = new ArrayList<Integer>();
-//		arr.add(10);
-////		arr.add(9);
-////		arr.add(8);
-////		arr.add(6);
-////		arr.add(5);
-//		
-//		google.insertInRightOrder(arr, 11);
+		System.out.println("-------");
+		for(String k : google.keywordsIndex.keySet()) {
+			System.out.print(k + ": ");
+			for(Occurrence o : google.keywordsIndex.get(k)) {
+				System.out.print(o + " -> ");
+			}
+			System.out.println();
+			System.out.println();
+		}
+		
+		ArrayList<String> top5 = google.top5search("deep", "world");
+		
+		for(String doc : top5) {
+			System.out.println(doc);
+		}
 	}
 }

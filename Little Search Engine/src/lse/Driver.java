@@ -7,7 +7,7 @@ public class Driver {
 	public static void main(String[] args) {
 		LittleSearchEngine google = new LittleSearchEngine();
 		try {
-			google.makeIndex("docs.txt", "noisewords.txt");
+			google.makeIndex("testdocs.txt", "noisewords.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,7 +23,7 @@ public class Driver {
 			System.out.println();
 		}
 		
-		ArrayList<String> top5 = google.top5search("deep", "world");
+		ArrayList<String> top5 = google.top5search("salman", "deep");
 		
 		for(String doc : top5) {
 			System.out.println(doc);

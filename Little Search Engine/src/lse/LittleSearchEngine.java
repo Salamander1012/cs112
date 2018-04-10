@@ -293,7 +293,17 @@ public class LittleSearchEngine {
 			}
 		}
 		
-		return docs;
+		if(docs.size()<=5) {
+			return docs;
+		} else {
+			ArrayList<String> top5Docs = new ArrayList<String>();
+			for(int i = 0; i<5; i++) {
+				top5Docs.add(docs.get(i));
+			}
+			return top5Docs;
+		}
+		
+		
 
 	
 	}

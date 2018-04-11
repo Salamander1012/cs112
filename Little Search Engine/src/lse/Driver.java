@@ -3,11 +3,13 @@ package lse;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class Driver {
 	public static void main(String[] args) {
 		LittleSearchEngine google = new LittleSearchEngine();
 		try {
-			google.makeIndex("testdocs.txt", "noisewords.txt");
+			google.makeIndex("docs.txt", "noisewords.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -15,7 +17,7 @@ public class Driver {
 		
 		System.out.println("-------");
 		for(String k : google.keywordsIndex.keySet()) {
-			System.out.print(k + ": ");
+			System.out.print("'" + k + "'" + ": ");
 			for(Occurrence o : google.keywordsIndex.get(k)) {
 				System.out.print(o + " -> ");
 			}
@@ -23,10 +25,13 @@ public class Driver {
 			System.out.println();
 		}
 		
-		ArrayList<String> top5 = google.top5search("salman", "deep");
+		ArrayList<String> top5 = google.top5search("world", "deep");
 		
 		for(String doc : top5) {
 			System.out.println(doc);
 		}
+		
+		
+
 	}
 }

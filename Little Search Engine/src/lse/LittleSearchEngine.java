@@ -59,6 +59,10 @@ public class LittleSearchEngine {
 			}
 		}
 		
+		if(map.containsKey("")) {
+			map.remove("");
+		}
+		
 		return map;
 	}
 	
@@ -196,6 +200,7 @@ public class LittleSearchEngine {
 		ArrayList<Integer> mids = new ArrayList<Integer>();
 		
 		Occurrence lastOccurrence = occs.get(occs.size()-1);
+		occs.remove(lastOccurrence);
 		int correctIndex = -1;
 		int l = 0, r = occs.size() - 1;
         while (l <= r)	{
@@ -214,7 +219,7 @@ public class LittleSearchEngine {
         }
         
         correctIndex = l + (r-l)/2;
-		occs.remove(lastOccurrence);
+		
 		occs.add(correctIndex, lastOccurrence);
 		
 //		for(Occurrence k : occs) {

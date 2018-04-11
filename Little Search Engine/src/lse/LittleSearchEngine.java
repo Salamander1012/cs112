@@ -118,12 +118,22 @@ public class LittleSearchEngine {
 		if(isNoiseWord(word)) {
 			return null;
 		}
+		if(containsNumbers(word)) {
+			return null;
+		}
 		
 		return word;
 	}
 	
 	private boolean isNoiseWord(String s) {
 		if(noiseWords.contains(s)) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean containsNumbers(String s) {
+		if(s.matches(".*\\d+.*")) {
 			return true;
 		}
 		return false;
@@ -170,7 +180,7 @@ public class LittleSearchEngine {
 	}
 
 	private boolean isPunctuation(char c) {
-		if (c == '.' || c == ',' || c == '?' || c == ':' || c == '!' || c == '\'' || c == '"' || c == '(' || c == ')' || c == '_' || c == '-' || c == '[' || c == ']' || c == ';') {
+		if (c == '.' || c == ',' || c == '?' || c == ':' || c == '!' || c == '\'' || c == '"' || c == '(' || c == ')' || c == '_' || c == '-' || c == '[' || c == ']' || c == ';' || c == '$' || c == '#' || c == '@' || c == '^' || c == '*' || c == '&') {
 			return true;
 		}
 		return false;

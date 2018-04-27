@@ -100,7 +100,7 @@ public class PartialTreeList implements Iterable<PartialTree> {
     public PartialTree removeTreeContaining(Vertex vertex) 
     throws NoSuchElementException {
     		/* COMPLETE THIS METHOD */
- 
+    		System.out.println("comparing vertex: " + vertex + "  to rear: " + rear.tree.getRoot().name);
     		Node ptr = rear.next;
     		int nodes = size;
     		while(nodes!=0) {
@@ -120,7 +120,6 @@ public class PartialTreeList implements Iterable<PartialTree> {
             			return deletion;
     				}
     			}
-    			System.out.println();
     			nodes--;
     			ptr = ptr.next;
     		}

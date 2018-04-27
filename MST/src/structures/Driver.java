@@ -11,32 +11,26 @@ public class Driver {
 			Graph g = new Graph("graph2.txt");
 			PartialTreeList L = MST.initialize(g);
 			
-			Iterator<PartialTree> iter = L.iterator();
-			while (iter.hasNext()) {
-				System.out.println(iter.next());
-			}
-			System.out.println();
-			
+			printPtList(L);
 			
 			MST.execute(L);
-			
-			iter = L.iterator();
-			while (iter.hasNext()) {
-				System.out.println(iter.next());
-			}
 			System.out.println();
 			
-			L.removeTreeContaining(new Vertex("A"));
 			
-			iter = L.iterator();
-			while (iter.hasNext()) {
-				System.out.println(iter.next());
-			}
-			System.out.println();
+			
+			
 			
 		} catch (IOException e) {
 			System.out.println(e);
 		}
 		
+	}
+	
+	public static void printPtList(PartialTreeList L) {
+		Iterator<PartialTree> iter = L.iterator();
+		while (iter.hasNext()) {
+			System.out.println(iter.next());
+		}
+		System.out.println();
 	}
 }

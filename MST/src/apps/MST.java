@@ -2,7 +2,7 @@ package apps;
 
 import structures.*;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 
 public class MST {
@@ -40,14 +40,14 @@ public class MST {
 	 */
 	public static ArrayList<PartialTree.Arc> execute(PartialTreeList ptlist) {
 		
-//		while(ptlist.size() != 1) {
+
 			
 			PartialTree PTX = ptlist.remove();
-			System.out.println(PTX);
+//			System.out.println(PTX);
 			MinHeap<PartialTree.Arc> PQX = PTX.getArcs();
 			
 			PartialTree.Arc a = PQX.getMin();
-			System.out.println(a);
+//			System.out.println(a);
 			
 			Vertex v1 = a.v1;
 			Vertex v2 = a.v2;
@@ -56,7 +56,7 @@ public class MST {
 //				
 //			}
 			PartialTree PTY = ptlist.removeTreeContaining(v2);
-			System.out.println(PTY);
+//			System.out.println(PTY);
 			MinHeap<PartialTree.Arc> PQY = PTY.getArcs();
 			
 			
@@ -64,14 +64,6 @@ public class MST {
 			
 			ptlist.append(PTY);
 			
-			
-			
-			Iterator<PartialTree> iter = ptlist.iterator();
-			while (iter.hasNext()) {
-				System.out.println(iter.next());
-			}
-			System.out.println();
-//		}
 		
 		
 		return null;

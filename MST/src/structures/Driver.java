@@ -20,7 +20,19 @@ public class Driver {
 			
 			MST.execute(L);
 			
+			iter = L.iterator();
+			while (iter.hasNext()) {
+				System.out.println(iter.next());
+			}
+			System.out.println();
 			
+			L.removeTreeContaining(new Vertex("A"));
+			
+			iter = L.iterator();
+			while (iter.hasNext()) {
+				System.out.println(iter.next());
+			}
+			System.out.println();
 			
 		} catch (IOException e) {
 			System.out.println(e);

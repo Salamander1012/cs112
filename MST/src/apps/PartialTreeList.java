@@ -110,6 +110,17 @@ public class PartialTreeList implements Iterable<PartialTree> {
         			size--;
         			return deletion;
     			}
+    			Iterator<PartialTree.Arc> iter = ptr.next.tree.getArcs().iterator();
+    			while (iter.hasNext()) {
+    				PartialTree.Arc arc = iter.next();
+    				if(arc.v1.name.equals(vertex.name)) {
+    					PartialTree deletion = ptr.next.tree;
+            			ptr.next = ptr.next.next;
+            			size--;
+            			return deletion;
+    				}
+    			}
+    			System.out.println();
     			nodes--;
     			ptr = ptr.next;
     		}

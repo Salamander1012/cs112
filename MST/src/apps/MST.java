@@ -2,7 +2,7 @@ package apps;
 
 import structures.*;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 
 
@@ -80,15 +80,11 @@ public class MST {
 				ptlist.append(PTX);
 				
 				System.out.println();
-				Iterator<PartialTree> iter = ptlist.iterator();
-				while (iter.hasNext()) {
-					System.out.println(iter.next());
-				}
-				System.out.println();
+
 				
 			}
 		
-		return null;
+		return list;
 	}
 	
 	private static boolean inUsed(PartialTree.Arc a, ArrayList<PartialTree.Arc> used) {
